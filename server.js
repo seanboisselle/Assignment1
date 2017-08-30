@@ -13,6 +13,8 @@ var listingData, server;
 var requestHandler = function(request, response) {
   var parsedUrl = url.parse(request.url);
 
+  //This decision structure only displays JSON data if a specified pathname is found.
+
   if (parsedUrl.pathname != '/listings' ) {
       response.writeHead(404, {'Content-Type': 'text/plain'});
 		  response.write("Bad gateway error");
@@ -25,6 +27,10 @@ var requestHandler = function(request, response) {
 };
 
 server = http.createServer(requestHandler);
+
+// This is a basic use case of the File System module in which the server
+// listens for incoming requests and outputs data in the form of the given
+// JSON file if an error is not found.
 
 fs.readFile('listings.json', 'utf8', function(err, data)
 {
